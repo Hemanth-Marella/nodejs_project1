@@ -1,23 +1,25 @@
 const express=require("express")
 
 const nodemon=require("nodemon")
+const { connectDB } = require("./database")
+const morgan = require("morgan")
+const { router } = require("./routers/routers")
 
 const app=express()
 
 
 const port=3000
 
+app.use(morgan("dev"))
+app.use(express.json())
+app.use("/p",router)
 
-let student=[
-    {name:"hemanth","rollno":592},
-    {name:"janu","rollno":55}
-]
+connectDB()
 
-app.get("",(req,res)=>{
-    res.status(200).send(student)
-})
+
+
 
 
 app.listen(port,()=>{
-    console.log(`http is require ${port}->hhtp://localhost:${port}`)
+    console.log(`server is running on${port}-> http://localhost:${port}`)
 })
