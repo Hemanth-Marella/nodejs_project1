@@ -8,11 +8,12 @@ const { router } = require("./routers/routers")
 const app=express()
 
 
-const port=3000
+const port=3001
 
 app.use(morgan("dev"))
 app.use(express.json())
-app.use("/p",router)
+app.use(express.urlencoded({extended:true}))
+app.use("/posts",router)
 
 connectDB()
 
